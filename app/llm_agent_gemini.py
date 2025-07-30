@@ -1,8 +1,6 @@
 #LLM connect
 #LLm fine tune 
 
-
-from google import genai
 from schema_helper import get_all_schema
 import google.generativeai as genai
 import re
@@ -15,10 +13,13 @@ model=genai.GenerativeModel("gemini-2.0-flash")
  # Get the schema information
 def build_prompt(user_question,schema):
     
-    return f"""
-You are an AI assistant that converts natural language into SQL queries.
+    return f"""  
+You are working with a Microsft SQL Server database.
+all tables are under the SalesLT schema. Use full table names in SQL queries like SalesLT.Customer.
 Database schema:
 {schema}
+You are an AI assistant that converts natural language into SQL server queries.
+
 User question: {user_question}
 Generate a SQL query that answers the user's question.Make sure to use the correct table and column names as per the schema provided.
 Return **only** the SQL query, without any additional text or explanation.
@@ -43,25 +44,13 @@ def ask_llm(user_question):
     #if you not return the sql query it will not work
     return sql_query
 
-
-def fix_sqlserver_syntax(query: str) -> str:
-
-
-    # - Removes MySQL-style backticks (`table`) and converts to [table]
-    # - Strips extra semicolons or whitespace
-
-    # Remove markdown formatting like ```sql or ``` at beginning/end
-    text = re.sub(r"```(?:sql)?", "", text, flags=re.IGNORECASE).strip()
+def cleaned_Query(originalQ):
+    convertedQ=originalQ.replace("```sql", "").replace("```", "").strip()
+    # Fix SQL Server syntax if needed
+    return convertedQ
     
-    # Match a SQL-like query (starts with SELECT, INSERT, UPDATE, DELETE, etc.)
-    match = re.search(r"(?i)(SELECT|INSERT|UPDATE|DELETE|CREATE|DROP|ALTER).*?;", text, re.DOTALL)
     
-    if match:
-        return match.group(0).strip()
-    else:
-        raise ValueError(" No valid SQL query found in the response.")
-
-    return match
+    
     
   
   
