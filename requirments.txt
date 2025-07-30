@@ -3,3 +3,8 @@ uvicorn
 pyodbc
 pandas
 google-generativeai
+jinja2
+plotly
+openpyxl
+streamlit
+flask-cors
