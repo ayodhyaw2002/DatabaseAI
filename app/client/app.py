@@ -1,13 +1,18 @@
 import streamlit as st
 import requests
+from streamlit_navigation_bar import st_navbar
 
-st.title("LLM SQL Query Runner")
+
+# page = st_navbar(
+#   ["Ask Me" , "Generate Chart"]
+# )
+st.title("Chat with M+")
 
 user_question = st.text_input("Ask your question:")
 
 if st.button("Run Query"):
     if user_question:
-        with st.spinner("Sending to backend..."):
+        with st.spinner("Thinking ..."):
             response = requests.post(
                 "http://localhost:8000/query",
                 json={"user_question": user_question}

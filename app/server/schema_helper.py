@@ -21,8 +21,9 @@ def get_all_schema():
   cursor.execute(query)
   results  = cursor.fetchall()
   
-  # for table_name, column_name, data_type in results:print(f"🟦 Table: {table_name} | Column: {column_name} | Type: {data_type}")ff   
-#write the schema to a file take foregn and primary key relationships into account   
+  
+  for table_name, column_name, data_type in results:print(f"🟦 Table: {table_name} | Column: {column_name} | Type: {data_type}") 
+# write the schema to a file take foregn and primary key relationships into account   
 
   
 

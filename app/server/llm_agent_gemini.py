@@ -5,7 +5,7 @@ from schema_helper import get_all_schema
 import google.generativeai as genai
 import re
 
-genai.configure(api_key="AIzaSyAv7urYwru-tiN-t0MpnknDCJS6Eg6ePmc") #customized genai application
+genai.configure(api_key="") #customized genai application
 model=genai.GenerativeModel("gemini-2.0-flash")
 
 
@@ -15,7 +15,7 @@ def build_prompt(user_question,schema):
     
     return f"""  
 You are working with a Microsft SQL Server database.
-all tables are under the SalesLT schema. Use full table names in SQL queries like SalesLT.Customer.
+all tables are under the dbo schema. Use full table names in SQL queries like dbo.Customer.
 Database schema:
 {schema}
 You are an AI assistant that converts natural language into SQL server queries.
