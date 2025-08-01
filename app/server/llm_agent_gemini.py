@@ -1,11 +1,17 @@
 #LLM connect
 #LLm fine tune 
 
-from schema_helper import get_all_schema
+from schema_helper import get_all_schema , schema_description
 import google.generativeai as genai
 import re
+from dotenv import load_dotenv
+import os
 
-genai.configure(api_key="") #customized genai application
+load_dotenv()
+
+
+# api_key = os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key="AIzaSyAv7urYwru-tiN-t0MpnknDCJS6Eg6ePmc") #customized genai application
 model=genai.GenerativeModel("gemini-2.0-flash")
 
 
@@ -15,8 +21,9 @@ def build_prompt(user_question,schema):
     
     return f"""  
 You are working with a Microsft SQL Server database.
-all tables are under the dbo schema. Use full table names in SQL queries like dbo.Customer.
+all tables and columns in the database are as follows:
 Database schema:
+{schema_description}
 {schema}
 You are an AI assistant that converts natural language into SQL server queries.
 

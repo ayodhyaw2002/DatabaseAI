@@ -7,10 +7,10 @@ def get_connection():
     try:
         coxn = pyodbc.connect(
             "Driver={ODBC Driver 17 for SQL Server};"
-            "Server=192.168.1.211;"
+            "Server=DESKTOP-1D87M7U\SQLEXPRESS;"
             "Database=AdventureWorksLT2022;"
             "UID=sa;"
-            "PWD=Sqlserver2017;"
+            "PWD=weerabahu1234;"
             "Encrypt=yes;"
             "TrustServerCertificate=yes;"
         )
